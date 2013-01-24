@@ -1,8 +1,10 @@
 **ALE - Another Looping Event - (Alpha)**
 
 Created by Ben Lesh
+http://www.benlesh.com
+ben@benlesh.com
 
-Licensed under GNU General Public License v 3
+Licensed under MIT license
 
 ===
 
@@ -45,23 +47,24 @@ To start a ALE in IIS:
 * Reference ALE and ALE.Web.
 * Add a reference to the HttpHandler in the Web.Config (here is the minimum Web.config required):
 
-    <?xml version="1.0"?>
-    <configuration>
-      <system.web>
-        <compilation debug="true" targetFramework="4.0" />
-      </system.web>
+        <?xml version="1.0"?>
+        <configuration>
+          <system.web>
+            <compilation debug="true" targetFramework="4.0" />
+         </system.web>
+         <system.webServer>
+       	 <validation validateIntegratedModeConfiguration="false"/>
+         	<modules runAllManagedModulesForAllRequests="true"/>
+         	<handlers>
+         	  <add verb="*" path="*"
+         		name="AleHttpHandler"
+         		type="ALE.Web.AleHttpHandler"/>
+         	</handlers>
+           </system.webServer>
+         </configuration>
+	 
+	 
 
-      <system.webServer>
-        <validation validateIntegratedModeConfiguration="false"/>
-        <modules runAllManagedModulesForAllRequests="true"/>
-        <handlers>
-          <add verb="*" path="*"
-            name="AleHttpHandler"
-            type="ALE.Web.AleHttpHandler"/>
-        </handlers>
-      </system.webServer>
-    </configuration>
-	
 * Add initialization code to Application_Start in your Global.asax:
 
     void Application_Start(object sender, EventArgs e)
@@ -88,6 +91,7 @@ To start a ALE in IIS:
 See my blog at http://www.benlesh.com for more information (posts tagged with ALE)
 
 Version History
+ * v 0.0.10.2 - Added basic Promise implementation
  * v 0.0.9.4 - Updated EventLoops to be slightly more efficient.
    * added unit tests.
    * Fixed issues with Razor templating.
